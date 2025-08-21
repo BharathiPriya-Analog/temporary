@@ -25,3 +25,5 @@ jobs:
           dependencies.enabled: true
           policies: copyleft,undeclared
           policies.halt_on_failure: true
+          format: cyclonedx
+          
