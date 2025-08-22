@@ -26,4 +26,18 @@ jobs:
           policies: copyleft,undeclared
           policies.halt_on_failure: true
           format: cyclonedx
+      - name: upload to dependency track
+        # uses: rosslight/DependencyTrackChecker@d5784cae089da1a3f3114f151d4841313d05b060
+        uses: rosslight/DependencyTrackChecker@v1.3
+        with:
+          # Dependency-Track hostname
+          server-hostname: http://localhost:8080/
+          # Dependency-Track API key
+          api-key: odt_lbiBLeIV_k03M3TKvnXxOjlY4hExDW835Mcer3h4Z
+          # Project in Dependency-Track
+          project: new-project
+          # Path and filename of the BOM
+          bom-filename: result.json
+          # Path and filename to save the output to
+          bom-output-filename: out-bom.xml
           
