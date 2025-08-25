@@ -26,18 +26,29 @@ jobs:
           policies: copyleft,undeclared
           policies.halt_on_failure: true
           format: cyclonedx
+#      - name: upload to dependency track
+#        # uses: rosslight/DependencyTrackChecker@d5784cae089da1a3f3114f151d4841313d05b060
+#        uses: rosslight/DependencyTrackChecker@v1.3
+#        with:
+#          # Dependency-Track hostname
+#          server-hostname: http://localhost:8080/
+#          # Dependency-Track API key
+#          api-key: odt_lbiBLeIV_k03M3TKvnXxOjlY4hExDW835Mcer3h4Z
+#          # Project in Dependency-Track
+#          project: new-project
+#          # Path and filename of the BOM
+#          bom-filename: /home/bthamoth/actions-runner/_work/temporary/temporary/result.json
+#          # Path and filename to save the output to
+#          bom-output-filename: out-bom.xml
+
       - name: upload to dependency track
-        # uses: rosslight/DependencyTrackChecker@d5784cae089da1a3f3114f151d4841313d05b060
-        uses: rosslight/DependencyTrackChecker@v1.3
+        uses: neerajsu/dependency-track-gh-action@v1.0.4
         with:
-          # Dependency-Track hostname
-          server-hostname: http://localhost:8080/
-          # Dependency-Track API key
-          api-key: odt_lbiBLeIV_k03M3TKvnXxOjlY4hExDW835Mcer3h4Z
-          # Project in Dependency-Track
-          project: new-project
-          # Path and filename of the BOM
-          bom-filename: /home/bthamoth/actions-runner/_work/temporary/temporary/result.json
-          # Path and filename to save the output to
-          bom-output-filename: out-bom.xml
-          
+          serverHostBaseUrl: 'http://localhost:8080/'
+          apikey: ${{ secrets.DEPENDENCY_TRACK_API_KEY }}
+          projectname: 'new-project'
+          projectversion: 'feat/some-feature-branch'
+          autocreate: 'true'
+          bomFilePath: '/home/bthamoth/actions-runner/_work/temporary/temporary/result.json'
+          timeoutInSecs: '10'
+          prNumber: '1'
