@@ -49,6 +49,6 @@ jobs:
           projectname: 'new-project'
           projectversion: 'feat/some-feature-branch'
           autocreate: 'true'
-          bomFilePath: '/home/bthamoth/actions-runner/_work/temporary/temporary/result.json'
+          bomFilePath: '/home/bthamoth/actions-runner/_work/temporary/temporary/results.json'
           timeoutInSecs: '10'
           prNumber: '1'
