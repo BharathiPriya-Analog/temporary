@@ -37,7 +37,7 @@ jobs:
           # Project in Dependency-Track
           project: new-project
           # Path and filename of the BOM
-          bom-filename: result.json
+          bom-filename: /home/bthamoth/actions-runner/_work/temporary/temporary/result.json
           # Path and filename to save the output to
           bom-output-filename: out-bom.xml
           
