@@ -45,7 +45,7 @@ jobs:
         uses: neerajsu/dependency-track-gh-action@v1.0.4
         with:
           serverHostBaseUrl: 'http://localhost:8080/'
-          apikey: ${{ secrets.DEPENDENCY_TRACK_API_KEY }}
+          apikey: odt_lbiBLeIV_k03M3TKvnXxOjlY4hExDW835Mcer3h4Z
           projectname: 'new-project'
           projectversion: 'feat/some-feature-branch'
           autocreate: 'true'
