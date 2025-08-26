@@ -1,23 +1,30 @@
 name: SCANOSS Code Scan
 
 on:
-  push:
-    branches: [ "*" ]
-  pull_request:
-
+  workflow_dispatch:
+    inputs:
+      repository:
+        description: 'Repository name (e.g., owner/repo)'
+        required: true
+        type: string
+      branch:
+        description: 'Branch name to checkout'
+        required: true
+        type: string
 permissions:
   contents: read
   pull-requests: write
   checks: write
   actions: read
-
 jobs:
-  scanoss-code-scan:
+  checkout-branch:
     runs-on: self-hosted
     steps:
-      - name: Checkout code
+      - name: Checkout specified branch from external repository
         uses: actions/checkout@v4
-
+        with:
+          repository: ${{ inputs.repository }}
+          ref: ${{ inputs.branch }}
       - name: Run SCANOSS Code Scan
         uses: scanoss/code-scan-action@v1
         with:
@@ -49,6 +56,6 @@ jobs:
           projectname: 'new-project'
           projectversion: 'feat/some-feature-branch'
           autocreate: 'true'
-          bomFilePath: '/home/bthamoth/actions-runner/_work/temporary/temporary/results.json'
+          bomFilePath: 'results.json'
           timeoutInSecs: '500'
           prNumber: '1'
