@@ -54,7 +54,7 @@ jobs:
           serverHostBaseUrl: 'http://localhost:8081/'
           apikey: odt_lbiBLeIV_k03M3TKvnXxOjlY4hExDW835Mcer3h4Z
           projectname: 'new-project'
-          projectversion: 'feat/some-feature-branch'
+          projectversion: '0.1.0'
           autocreate: 'true'
           bomFilePath: 'results.json'
           timeoutInSecs: '500'
