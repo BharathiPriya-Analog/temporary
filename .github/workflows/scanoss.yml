@@ -108,13 +108,11 @@ jobs:
     # Enable Dependency Track upload
           deptrack.upload: true
     # Dependency Track base URL
-          deptrack.url: http://localhost:8081
+          deptrack.url: http://ctse-test-u3.adlk.analog.com:8081
     # Dependency Track API key
           deptrack.apikey: ${{ secrets.DEPENDENCY_TRACK_API_KEY }}
-    # Dependency Track project UUID
-          deptrack.projectid: ba87be62-f575-480f-9cdd-be3afb7e5e8a
     # Dependency Track project name
-          deptrack.projectname: new-project
+          deptrack.projectname: new-project-1
     # Dependency Track project version
           deptrack.projectversion: 0.1.0
           
