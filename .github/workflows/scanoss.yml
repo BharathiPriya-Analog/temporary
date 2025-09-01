@@ -25,14 +25,14 @@ jobs:
         with:
           repository: ${{ inputs.repository }}
           ref: ${{ inputs.branch }}
-      - name: Run SCANOSS Code Scan
-        uses: scanoss/code-scan-action@v1
-        with:
-          output.filepath: results.json
-          dependencies.enabled: true
-          policies: copyleft,undeclared
-          policies.halt_on_failure: true
-          format: cyclonedx
+#      - name: Run SCANOSS Code Scan
+#        uses: scanoss/code-scan-action@v1
+#        with:
+#          output.filepath: results.json
+#          dependencies.enabled: true
+#          policies: copyleft,undeclared
+#          policies.halt_on_failure: true
+#          format: cyclonedx
 #      - name: upload to dependency track
 #       # uses: rosslight/DependencyTrackChecker@d5784cae089da1a3f3114f151d4841313d05b060
 #      uses: rosslight/DependencyTrackChecker@v1.3
@@ -40,7 +40,7 @@ jobs:
 #          # Dependency-Track hostname
 #          server-hostname: http://localhost:8081/
 #          # Dependency-Track API key
-#          api-key: odt_lbiBLeIV_k03M3TKvnXxOjlY4hExDW835Mcer3h4Z
+#          api-key: 
 #          # Project in Dependency-Track
 #          project: new-project-rosslight
 #          # Path and filename of the BOM
@@ -48,14 +48,73 @@ jobs:
 #          # Path and filename to save the output to
 #          bom-output-filename: out-bom.xml
 
-      - name: upload to dependency track
-        uses: neerajsu/dependency-track-gh-action@v1.0.4
+ #     - name: upload to dependency track
+ #       uses: neerajsu/dependency-track-gh-action@v1.0.4
+ #       with:
+ #         serverHostBaseUrl: 'http://localhost:8081/'
+ #         apikey: 
+ #         projectname: 'new-project-neerajsu'
+ #         projectversion: '0.1.0'
+ #         autocreate: 'true'
+ #         bomFilePath: 'results.json'
+ #         timeoutInSecs: '500'
+ #         prNumber: '1'
+
+      - name: SCANOSS Code Scan Action
+  # You may pin to the exact commit or the version.
+  # uses: scanoss/gha-code-scan@cffd6009a8a058e30b9f1a8be25a2724220d3e32
+        uses: scanoss/gha-code-scan@v1.2.1
         with:
-          serverHostBaseUrl: 'http://localhost:8081/'
-          apikey: odt_lbiBLeIV_k03M3TKvnXxOjlY4hExDW835Mcer3h4Z
-          projectname: 'new-project-neerajsu'
-          projectversion: '0.1.0'
-          autocreate: 'true'
-          bomFilePath: 'results.json'
-          timeoutInSecs: '500'
-          prNumber: '1'
+    # Stop the pipeline if an error is encountered as opposed to a policy failure
+          halt_on_error: true
+    # List of policies separated by comma (e.g., copyleft, undeclared, dt)
+          policies: copyleft,undeclared
+    # Halt if a check fails
+          policies.halt_on_failure: true
+    # SCANOSS API Key token (optional - not required for default OSSKB URL)
+          #api.key: # optional
+    # SCANOSS API URL (optional - default: https://api.osskb.org/scan/direct)
+          #api.url: # optional
+    # Scan dependencies (optional - default false)
+          dependencies.enabled: true
+    # Gets development or production dependencies (scopes - prod|dev)
+          #dependencies.scope: # optional, default is 
+    # Custom list of dependency scopes to be included. Provide scopes as a comma-separated list.
+          #dependencies.scope.include: # optional, default is 
+    # Custom list of dependency scopes to be excluded. Provide scopes as a comma-separated list.
+          #dependencies.scope.exclude: # optional, default is 
+    # Scanner results filepath
+          output.filepath: results.json
+    # Your GitHub token
+          #github.token: # optional, default is ${{ github.token }}
+    # List of Copyleft licenses to append to the default list. Provide licenses as a comma-separated list.
+          #licenses.copyleft.include: # optional
+    # List of Copyleft licenses to remove from default list. Provide licenses as a comma-separated list.
+          #licenses.copyleft.exclude: # optional
+    # Explicit list of Copyleft licenses to consider. Provide licenses as a comma-separated list.
+          #licenses.copyleft.explicit: # optional
+    # Specify runtime container to perform the scan.
+          #runtimeContainer: # optional, default is ghcr.io/scanoss/scanoss-py:v1.31.5
+    # Skip the generation of snippets.
+          skipSnippets: false
+    # Enable or disable file and snippet scanning.
+          scanFiles: true
+    # Settings file to use for scanning.
+          #scanossSettings: # optional, default is true
+    # SCANOSS settings file path.
+          #settingsFilepath: # optional, default is scanoss.json
+    # Enable debugging on scanoss.py
+          debug: true
+    # Enable Dependency Track upload
+          deptrack.upload: true
+    # Dependency Track base URL
+          deptrack.url: http://localhost:8081
+    # Dependency Track API key
+          deptrack.apikey: ${{ secrets.DEPENDENCY_TRACK_API_KEY }}
+    # Dependency Track project UUID
+          deptrack.projectid: ba87be62-f575-480f-9cdd-be3afb7e5e8a
+    # Dependency Track project name
+          deptrack.projectname: new-project
+    # Dependency Track project version
+          deptrack.projectversion: 0.1.0
+          
