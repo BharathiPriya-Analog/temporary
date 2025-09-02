@@ -36,7 +36,6 @@ jobs:
       - name: SCANOSS Code Scan Action
         uses: scanoss/gha-code-scan@v1.2.1
         with:
-          policies: copyleft,undeclared,dt
           dependencies.enabled: true
           debug: true
           deptrack.upload: true
